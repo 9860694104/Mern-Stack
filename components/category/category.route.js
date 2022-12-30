@@ -11,5 +11,7 @@ router.route("/all")
 
 router.route("/:id")
     .get(authorization, categoryController.getSingleCategory)
+    .put(authorization, categoryController.updateCaegory)
+    .delete(authorization, categoryController.deleteCategory)
 
 module.exports = router;

@@ -22,7 +22,28 @@ function getAllCategories(req, res, next) {
 }
 
 function getSingleCategory(req, res, next) {
-    categoryQuery.findSingleCategory(req.params.id)
+    categoryQuery.findsingleCategory(req.params.id)
+        .then(function (data) {
+            res.status(200).json(data)
+        })
+        .catch(function (err) {
+            next(err);
+        })
+}
+
+function updateCaegory(req, res, next) {
+    req.body.modifiedBy = req.loggedInUser;
+    categoryQuery.updateCaegory(req.params.id, req.body)
+        .then(function (data) {
+            res.status(200).json(data)
+        })
+        .catch(function (err) {
+            next(err);
+        })
+}
+
+function deleteCategory(req, res, next) {
+    categoryQuery.removeCategory(req.params.id)
         .then(function (data) {
             res.status(200).json(data)
         })
@@ -34,5 +55,7 @@ function getSingleCategory(req, res, next) {
 module.exports = {
     createCategory,
     getAllCategories,
-    getSingleCategory
+    getSingleCategory,
+    updateCaegory,
+    deleteCategory
 }
