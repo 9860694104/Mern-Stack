@@ -1,0 +1,22 @@
+html 
+    head 
+        title=titleName   
+        link(rel="stylesheet", href="./../../css/bootstrap.css")
+
+        body 
+            div(class="container")
+                div(class="row")
+                    div(class="col-sm-4 col-sm-offset-4")
+                        h1=bodyTitle
+                        form(action = "", method = "post")
+                            label(for="username") Username 
+                            input(type= "text" , class ="form-control" , name = "username" , placeholder ="Username")
+                            br
+                            label(for="password") Password 
+                            input(type= "password" , class ="form-control" , name = "password" , placeholder ="Password ")
+                            br 
+                            input(type="submit" , value="Login" ,  class="btn btn-md btn-success")
+                            br
+                            br
+                            p Don't have an Account ?
+                                a(href="/api/auth/register") Register
