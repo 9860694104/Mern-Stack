@@ -1,6 +1,13 @@
 const featuresQuery = require("./features.query")
 
 function createfeature(req, res, next) {
+    if (req.fileError) {
+        return next({ msg: "Invalid File Format" })
+    }
+    if (req.file) {
+        req.body.Image = req.file.filename;
+    }
+
     req.body.createdBy = req.loggedInUser;
     featuresQuery.insertfeature(req.body)
         .then(function (data) {

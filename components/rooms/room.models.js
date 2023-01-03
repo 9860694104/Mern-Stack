@@ -13,7 +13,8 @@ const roomSchema = new Schema({
         type: Boolean,
         default: false
     },
-    thumbnailImages: String,
+    thumbnailImage: String,
+    coverImage: String,
     galleryImages: [String],
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,

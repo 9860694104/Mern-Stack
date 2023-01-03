@@ -8,10 +8,10 @@ module.exports = function (room, data) {
     if (data.shortDescription) {
         room.shortDescription = data.shortDescription;
     }
-
     if (data.category) {
         room.category = data.category;
     }
+
     if (data.features) {
         if (room.features.length == 0) {
             room.features = data.features.split(',');
@@ -24,6 +24,15 @@ module.exports = function (room, data) {
     }
     if (data.createdBy) {
         room.createdBy = data.createdBy;
+    }
+    if (data.coverImage) {
+        room.coverImage = data.coverImage;
+    }
+    if (data.galleryImages) {
+        room.galleryImages = data.galleryImages;
+    }
+    if (data.thumbnailImage) {
+        room.thumbnailImage = data.thumbnailImage;
     }
     if (data.modifiedBy) {
         room.modifiedBy = data.modifiedBy;
