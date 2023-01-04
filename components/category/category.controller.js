@@ -1,6 +1,15 @@
 const categoryQuery = require("./category.query")
 
 function createCategory(req, res, next) {
+
+    if (req.fileError) {
+        return next({ msg: "Invalid Format" })
+    }
+
+    if (req.file) {
+        req.body.Image = req.file.filename
+    }
+
     req.body.createdBy = req.loggedInUser;
     categoryQuery.insertCategory(req.body)
         .then(function (data) {

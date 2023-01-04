@@ -2,8 +2,11 @@ module.exports = function (feature, data) {
     if (data.Title) {
         feature.Title = data.Title
     }
-    if (data.Image) {
-        feature.Image = data.Image
+    if (data.thumbnailImage) {
+        feature.thumbnailImage = data.thumbnailImage
+    }
+    if (data.galleryImages) {
+        feature.galleryImages = data.galleryImages
     }
     if (data.createdBy) {
         feature.createdBy = data.createdBy;

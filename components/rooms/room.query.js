@@ -2,6 +2,7 @@ const RoomModel = require("./room.models");
 const roomMapping = require("./../../helpers/room.mapping");
 
 function insertRoom(data) {
+    // console.log(data)
     return new Promise(function (resolve, reject) {
         const newRoom = new RoomModel({});
         const ourRoomMapped = roomMapping(newRoom, data)

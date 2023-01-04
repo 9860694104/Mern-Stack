@@ -7,7 +7,8 @@ const featuresSchema = new Schema({
         unique: true,
         required: true
     },
-    Image: String,
+    thumbnailImage: String,
+    galleryImages: [String],
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "users"

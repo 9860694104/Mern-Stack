@@ -1,12 +1,24 @@
 const featuresQuery = require("./features.query")
 
 function createfeature(req, res, next) {
+
+    if (req.files) {
+        if (req.files.thumbnailImage) {
+            req.body.thumbnailImage = req.files.thumbnailImage[0].filename;
+        }
+        if (req.files.galleryImages) {
+            var myImages = [];
+            req.files.galleryImages.forEach(function (item, index) {
+                myImages.push(item.filename)
+            })
+            req.body.galleryImages = myImages
+        }
+    }
+
     if (req.fileError) {
         return next({ msg: "Invalid File Format" })
     }
-    if (req.file) {
-        req.body.Image = req.file.filename;
-    }
+
 
     req.body.createdBy = req.loggedInUser;
     featuresQuery.insertfeature(req.body)

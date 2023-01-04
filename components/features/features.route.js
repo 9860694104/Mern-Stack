@@ -7,12 +7,12 @@ const authorization = require("./../../middlewares/authorization")
 
 const myStorage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "public/images/");
+        cb(null, "public/images")
     },
     filename: function (req, file, cb) {
-        cb(null, file.originalname)
+        cb(null, new Date().getTime() + "-" + file.originalname)
     }
-});
+})
 
 function myFileFilter(req, file, cb) {
     var mimeType = file.mimetype.split("/")[0];
@@ -27,10 +27,13 @@ function myFileFilter(req, file, cb) {
 const upload = multer({
     storage: myStorage,
     fileFilter: myFileFilter
-})
+}).fields([
+    { name: "thumbnailImage" },
+    { name: "galleryImages" }
+])
 
 router.route("/")
-    .post(upload.single("Image"), featuresController.createfeature)
+    .post(upload, featuresController.createfeature)
 
 router.route("/all")
     .get(authorization, featuresController.getAllfeatures)

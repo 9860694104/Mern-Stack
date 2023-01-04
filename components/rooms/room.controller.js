@@ -1,10 +1,7 @@
 const roomQuery = require("./room.query");
-const fs = require("fs");
-const path = require("path");
+
 
 function createRoom(req, res, next) {
-
-    console.log("req.files", req.files);
 
     if (req.fileError) {
         return next({ msg: "Invalid  File Format" })
