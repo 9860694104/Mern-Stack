@@ -8,4 +8,7 @@ router.route("/register")
 router.route("/login")
     .post(authController.login)
 
+router.route("/email-verification/:email_verification_token")
+    .post(authController.emailVerfication)
+
 module.exports = router;

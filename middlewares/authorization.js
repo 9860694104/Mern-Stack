@@ -5,7 +5,7 @@ module.exports = function (req, res, next) {
         if (err) {
             return next(err);
         }
-        if (user.role == "super-admin") {
+        if (user.role == "super-admin" || user.role == "admin") {
             next();
         } else {
             next({ msg: "Access Denied !!!" })

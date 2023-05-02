@@ -15,9 +15,9 @@ function insertRoom(data) {
     })
 }
 
-function findAllRooms() {
+function findAllRooms(condition) {
     return new Promise(function (resolve, reject) {
-        RoomModel.find({}).populate('createdBy').exec(function (err, rooms) {
+        RoomModel.find(condition).populate('createdBy').exec(function (err, rooms) {
             if (err) {
                 return reject(err);
             }
@@ -33,7 +33,7 @@ function findAllRooms() {
 
 function findsingleRoom(id) {
     return new Promise(function (resolve, reject) {
-        RoomModel.findById(id).populate('createdBy').exec(function (err, room) {
+        RoomModel.findById(id).exec(function (err, room) {
             if (err) {
                 return reject(err);
             }

@@ -8,6 +8,7 @@ const roomSchema = new Schema({
     },
     shortDescription: String,
     category: String,
+    bedCapacity: Number,
     features: [String],
     isBook: {
         type: Boolean,

@@ -11,8 +11,16 @@ module.exports = function (user, data) {
         user.phone = data.phone;
     if (data.birthDate)
         user.birthDate = data.birthDate;
-    if (data.role)
-        user.role = data.role;
+    if (data.isEmailVerified)
+        user.isEmailVerified = data.isEmailVerified;
+    if (data.emailVerficationToken)
+        user.emailVerficationToken = data.emailVerficationToken;
+    if (data.emailVerficationTokenExpire)
+        user.emailVerficationTokenExpire = data.emailVerficationTokenExpire;
+    if (data.resetPasswordToken)
+        user.resetPasswordToken = data.resetPasswordToken;
+    if (data.resetPasswordTokenExpire)
+        user.resetPasswordTokenExpire = data.resetPasswordTokenExpire;
 
     return user;
 }

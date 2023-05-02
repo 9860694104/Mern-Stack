@@ -2,14 +2,14 @@ const exp = require("constants");
 const { json } = require("express");
 const express = require("express");
 const app = express();
+const cors = require("cors")
 const config = require("./config");
 const morgan = require("morgan");
 const path = require("path");
 const pug = require("pug");
 require("./db");
 
-
-
+app.use(cors());
 
 //SetUp Template Engine
 app.set("view engine", pug);
@@ -44,10 +44,11 @@ app.use(function (req, res, next) {
     res.json({ msg: "PAGE NOT FOUND" })
 })
 
+//Error Handling MiddleWare
 app.use(function (err, req, res, next) {
-    console.log("I am Error MiddleWare");
-    res.json({
-        msg: "I am Error MiddleWare",
+    console.log("Error is ; ", err);
+    res.status(err.status || 400).json({
+        msg: "ERROR Handling Middleware !! Something went Wrong",
         err: err
     })
 })

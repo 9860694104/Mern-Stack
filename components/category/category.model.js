@@ -8,11 +8,11 @@ const categorySchema = new Schema({
     },
     Image: String,
     createdBy: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "users"
     },
     modifiedBy: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "users"
     }
 },

@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 
-const authorization = require("./../../middlewares/authorization")
+const authorization = require("./../../middlewares/authorization");
+const authentication = require("./../../middlewares/authentication")
 const roomController = require("./room.controller");
 
 const myStorage = multer.diskStorage({
@@ -35,18 +36,22 @@ const upload = multer({
 
 
 router.route("/")
-    .post(upload, roomController.createRoom)
+    .post(upload, authentication, roomController.createRoom)
 
 router.route("/all")
-    .get(authorization, roomController.getAllRooms)
+    .get(authentication, roomController.getAllRooms)
 
 router.route("/all-room-userid")
     .get(roomController.getRoomsbyUserId)
 
+router.route("/search?")
+    .get(roomController.searchByGet)
+    .post(roomController.searchByPost)
+
 router.route("/:id")
-    .get(authorization, roomController.getSingleRoom)
-    .put(authorization, roomController.updateRoom)
-    .delete(authorization, roomController.deleteRoom)
+    .get(authentication, authorization, roomController.getSingleRoom)
+    .put(upload, authentication, authorization, roomController.updateRoom)
+    .delete(authentication, authorization, roomController.deleteRoom)
 
 
 module.exports = router;

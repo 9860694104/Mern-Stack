@@ -15,9 +15,9 @@ const categoryRoute = require("./../components/category/category.route");
 router.use("/auth", require("./../components/auth/authRoute"));
 router.use("/user", authentication, require("./../components/user/userRoute"));
 router.use("/review", reviewRoute);
-router.use("/room", authentication, roomRoute);
-router.use("/features", authentication, featuresRouter);
-router.use("/category", authentication, categoryRoute);
+router.use("/room", roomRoute);
+router.use("/features", featuresRouter);
+router.use("/category", categoryRoute);
 
 
 module.exports = router;

@@ -20,7 +20,15 @@ const userSchema = new Schema({
         type: String,
         enum: ['super-admin', 'admin', 'visitor'],
         default: 'visitor'
-    }
+    },
+    isEmailVerified: {
+        type: Boolean,
+        default: false
+    },
+    emailVerficationToken: String,
+    emailVerficationTokenExpire: Date,
+    resetPasswordToken: String,
+    resetPasswordTokenExpire: Date,
 }, { timestamps: true });
 
 

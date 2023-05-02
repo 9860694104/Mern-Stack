@@ -5,9 +5,11 @@ const config = require("./../../config")
 
 
 function register(req, res, next) {
+    console.log("req.body", req.body);
     authQuery.signUp(req.body)
         .then(function (data) {
             res.status(200).json(data)
+            console.log("new User", data);
         })
         .catch(function (err) {
             next(err);
@@ -30,8 +32,19 @@ function login(req, res, next) {
         })
 }
 
+function emailVerfication(req, res, next) {
+    authQuery.emailVerfication(req.params.email_verification_token)
+        .then(function (data) {
+            res.status(200).json(data);
+        })
+        .catch(function (err) {
+            next(err);
+        })
+}
+
 module.exports = {
     register,
-    login
+    login,
+    emailVerfication
 
 }

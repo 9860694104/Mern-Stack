@@ -12,12 +12,17 @@ module.exports = function (room, data) {
         room.category = data.category;
     }
 
+    if (data.bedCapacity) {
+        room.bedCapacity = data.bedCapacity;
+    }
+
     if (data.features) {
-        if (room.features.length == 0) {
-            room.features = data.features.split(',');
-        } else {
-            room.features = room.features.concat(data.features.split(',')) //yeti le matra ni kaam garxa
-        }
+        room.features = Array.isArray(data.features) ? data.features : data.features.trim().split(",");
+        // if (room.features.length == 0) {
+        //     room.features = data.features.split(',');
+        // } else {
+        //     room.features = room.features.concat(data.features.split(',')) //yeti le matra ni kaam garxa
+        // }
     }
     if (data.isBook) {
         room.isBook = data.isBook;
