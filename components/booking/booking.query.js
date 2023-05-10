@@ -5,12 +5,11 @@ function insertBooking(data) {
     return new Promise(function (resolve, reject) {
         const newBooking = new BookingModel({})
         const mappedBooking = mappingBooking(newBooking, data)
-        // console.log(newBooking);
-        mappedBooking.save(function (err, success) {
+        mappedBooking.save(function (err, bookedRoom) {
             if (err) {
                 return reject(err);
             }
-            resolve(success)
+            resolve(bookedRoom)
         })
     })
 }

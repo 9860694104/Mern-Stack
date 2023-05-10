@@ -34,7 +34,7 @@ function signUp(data) {
             resolve(createdUser)
             transporter.sendMail({
                 from: 'From Nodemailer <foo@example.com>',
-                to: "shresthasabeen016@gmail.com",
+                to: createdUser.email,
                 subject: "Hello ✔ Hello ✔ Hello ✔",
                 text: "Hello Express",
                 html: `
@@ -86,8 +86,74 @@ function emailVerfication(token) {
     })
 }
 
+function forgetPassword(email) {
+    return new Promise(function (resolve, reject) {
+        UserModel.findOne({ email }, function (err, emailExitedUser) {
+            if (err) {
+                return reject(err);
+            }
+            if (!emailExitedUser) {
+                return reject({ msg: "Email doesnot exist !!!" })
+            }
+
+            //Send Mail with Token
+
+            const currentDate = new Date().getTime();
+            const oneDay = 1000 * 60 * 60 * 24;
+
+            emailExitedUser.resetPasswordToken = uuidv4();
+            emailExitedUser.resetPasswordTokenExpire = currentDate + oneDay;
+
+            emailExitedUser.save(function (err, forgetedPasswordUser) {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(forgetedPasswordUser)
+                transporter.sendMail({
+                    from: 'From Nodemailer <foo@example.com>',
+                    to: forgetedPasswordUser.email,
+                    subject: "Password Reset",
+                    text: "Hello Express",
+                    html: `
+                    <h1>Hello ${forgetedPasswordUser.name}</h1>
+                    <p>Please Reset Your Password by clicking this link <a href="http://localhost:3000/reset-password/${forgetedPasswordUser.resetPasswordToken}">Click Link</a></p>`,
+                })
+            });
+        })
+    })
+}
+
+function resetPassword(data, token) {
+    const currentDate = new Date().getTime();
+    return new Promise(function (resolve, reject) {
+        UserModel.findOne({ resetPasswordToken: token }, function (err, user) {
+            if (err) {
+                return reject(err);
+            }
+            if (!user) {
+                return reject({ msg: "Invalid Token !!!" })
+            }
+            if (user.resetPasswordTokenExpire > currentDate) {
+                user.password = passwordHash.generate(data.password);
+                user.resetPasswordToken = "";
+                user.resetPasswordTokenExpire = "";
+                user.save(function (err, updatedPassword) {
+                    if (err) {
+                        return reject(err);
+                    }
+                    resolve(updatedPassword)
+                })
+            } else {
+                reject({ msg: "Token Expired !!!" })
+            }
+        })
+    })
+}
+
 module.exports = {
     signUp,
     signIn,
-    emailVerfication
+    emailVerfication,
+    forgetPassword,
+    resetPassword
 }

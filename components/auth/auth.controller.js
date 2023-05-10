@@ -42,9 +42,31 @@ function emailVerfication(req, res, next) {
         })
 }
 
+function forgotPassword(req, res, next) {
+    authQuery.forgetPassword(req.body.email)
+        .then(function (data) {
+            res.status(200).json(data);
+        })
+        .catch(function (err) {
+            next(err);
+        })
+}
+
+function resetPassword(req, res, next) {
+    authQuery.resetPassword(req.body, req.params.reset_password_token)
+        .then(function (data) {
+            res.status(200).json(data);
+        })
+        .catch(function (err) {
+            next(err);
+        })
+}
+
 module.exports = {
     register,
     login,
-    emailVerfication
+    emailVerfication,
+    forgotPassword,
+    resetPassword
 
 }

@@ -39,7 +39,7 @@ router.route("/")
     .post(upload, authentication, roomController.createRoom)
 
 router.route("/all")
-    .get(authentication, roomController.getAllRooms)
+    .get(roomController.getAllRooms)
 
 router.route("/all-room-userid")
     .get(roomController.getRoomsbyUserId)

@@ -1,4 +1,4 @@
-const bookingQuery = import("./booking.query");
+const bookingQuery = require("./booking.query");
 
 function createBooking(req, res, next) {
     bookingQuery.createBooking(req.body)

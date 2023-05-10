@@ -19,7 +19,7 @@ const userSchema = new Schema({
     role: {
         type: String,
         enum: ['super-admin', 'admin', 'visitor'],
-        default: 'visitor'
+        default: 'admin'
     },
     isEmailVerified: {
         type: Boolean,

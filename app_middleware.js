@@ -41,7 +41,7 @@ app.use("/", function (req, res, next) {
 
 app.use(function (req, res, next) {
     console.log("PAGE NOT FOUND");
-    res.json({ msg: "PAGE NOT FOUND" })
+    res.status(404).json({ msg: "PAGE NOT FOUND" })
 })
 
 //Error Handling MiddleWare
