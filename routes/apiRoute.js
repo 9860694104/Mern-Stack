@@ -19,7 +19,7 @@ router.use("/review", reviewRoute);
 router.use("/room", roomRoute);
 router.use("/features", featuresRouter);
 router.use("/category", categoryRoute);
-router.use("/booking", bookingRoute)
+router.use("/booking", authentication, bookingRoute)
 
 
 module.exports = router;

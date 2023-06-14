@@ -3,6 +3,8 @@ module.exports = function (booking, data) {
         booking.fromDate = data.fromDate;
     if (data.toDate)
         booking.toDate = data.toDate;
+    if (data.status)
+        booking.status = data.status;
     if (data.roomId)
         booking.roomId = data.roomId;
     if (data.createdBy)
